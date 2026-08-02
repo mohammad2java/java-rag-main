@@ -10,6 +10,83 @@ This project demonstrates how to:
 - Augment LLM responses with relevant document context
 - Create an API endpoint for document-aware chat interactions
 
+## Exact flow :
+-----------
+## Flow
+
+### 1. Application Startup
+- Read PDF documents.
+- Split the documents into smaller chunks.
+- Generate vector embeddings for each chunk.
+- Store the embeddings in the vector database.
+
+### 2. User Query
+- User sends a question to the `ChatController`.
+
+### 3. Semantic Search
+- The advisor performs a semantic search on the vector database using the user's question.
+- Retrieve the most relevant document chunks.
+
+### 4. LLM Request
+- Combine:
+   - User's question
+   - Retrieved document chunks (context)
+- Send the combined prompt to the LLM.
+
+### 5. Response
+- The LLM generates an answer based on the provided context.
+- `ChatController` returns the generated response to the user.
+
+---
+
+## End-to-End Flow
+
+```text
+Application Startup
+    │
+    ▼
+Read PDF Documents
+    │
+    ▼
+Chunk Documents
+    │
+    ▼
+Generate Embeddings
+    │
+    ▼
+Store in Vector Database
+    │
+──────────────────────────────────────────────
+    │
+User Question
+    │
+    ▼
+ChatController
+    │
+    ▼
+Spring Advisor
+    │
+    ▼
+Semantic Search (Vector Database)
+    │
+    ▼
+Retrieve Relevant Chunks
+    │
+    ▼
+Question + Context
+    │
+    ▼
+LLM
+    │
+    ▼
+Generated Response
+    │
+    ▼
+Return Response to User
+```
+
+
+
 ## Project Requirements
 
 - Java 21
